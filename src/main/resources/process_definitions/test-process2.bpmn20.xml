@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:flowable="http://flowable.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.flowable.org/processdef">
+  <process id="test-process2" name="test-process2" isExecutable="true">
+    <startEvent id="start-event"></startEvent>
+    <userTask id="user-task" name="User task"></userTask>
+    <sequenceFlow id="sid-4C1ED87F-9A5E-44B5-8F50-486FB11CFB0B" sourceRef="start-event" targetRef="user-task"></sequenceFlow>
+    <endEvent id="end-event"></endEvent>
+    <sequenceFlow id="sid-3FB53962-EAA8-41D8-B945-3AACD226CE69" sourceRef="user-task" targetRef="end-event"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_test-process">
+    <bpmndi:BPMNPlane bpmnElement="test-process2" id="BPMNPlane_test-process">
+      <bpmndi:BPMNShape bpmnElement="start-event" id="BPMNShape_start-event">
+        <omgdc:Bounds height="30.0" width="30.0" x="100.0" y="145.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="user-task" id="BPMNShape_user-task">
+        <omgdc:Bounds height="80.0" width="100.0" x="330.0" y="120.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="end-event" id="BPMNShape_end-event">
+        <omgdc:Bounds height="28.0" width="28.0" x="688.0" y="150.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="sid-4C1ED87F-9A5E-44B5-8F50-486FB11CFB0B" id="BPMNEdge_sid-4C1ED87F-9A5E-44B5-8F50-486FB11CFB0B">
+        <omgdi:waypoint x="129.94999973967353" y="160.0"></omgdi:waypoint>
+        <omgdi:waypoint x="329.99999999999613" y="160.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-3FB53962-EAA8-41D8-B945-3AACD226CE69" id="BPMNEdge_sid-3FB53962-EAA8-41D8-B945-3AACD226CE69">
+        <omgdi:waypoint x="429.94999999999857" y="160.62049689440994"></omgdi:waypoint>
+        <omgdi:waypoint x="688.0005612414735" y="163.8261000987639"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

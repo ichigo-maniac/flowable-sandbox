@@ -1,17 +1,17 @@
 package ru.sandbox.flowablesandbox.configuration;
 
-import org.flowable.engine.ProcessEngine;
-import org.flowable.engine.ProcessEngineConfiguration;
-import org.flowable.engine.RuntimeService;
+import org.flowable.engine.*;
 import org.flowable.spring.SpringProcessEngineConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.sql.DataSource;
+import java.io.IOException;
 
 @Configuration
 public class FlowableConfiguration {
@@ -22,11 +22,18 @@ public class FlowableConfiguration {
         configuration.setDataSource(dataSource);
         configuration.setTransactionManager(transactionManager);
         configuration.setDatabaseSchemaUpdate(ProcessEngineConfiguration.DB_SCHEMA_UPDATE_TRUE);
-        /** Deployment resources */
-//        Resource[] deploymentResources = new Resource[1];
-//        deploymentResources[0] = new ClassPathResource("/process_definitions/*.bpmn20.xml");
-//        configuration.setDeploymentResources(deploymentResources);
+        configuration.setDeploymentResources(getAutoDeployResources());
         return configuration;
+    }
+
+    private Resource[] getAutoDeployResources() {
+        PathMatchingResourcePatternResolver resourcePatternResolver = new PathMatchingResourcePatternResolver();
+        try {
+            Resource[] resources = resourcePatternResolver.getResources("classpath:/process_definitions/*.bpmn20.xml");
+            return resources;
+        } catch (IOException e) {
+            return new Resource[0];
+        }
     }
 
     @Bean(name = "flowableSandboxProcessEngine")
@@ -37,6 +44,21 @@ public class FlowableConfiguration {
     @Bean(name = "flowableSandboxRuntimeService")
     public RuntimeService runtimeService(ProcessEngine processEngine) {
         return processEngine.getRuntimeService();
+    }
+
+    @Bean(name = "flowableSandboxRepositoryService")
+    public RepositoryService repositoryService(ProcessEngine processEngine) {
+        return processEngine.getRepositoryService();
+    }
+
+    @Bean(name = "flowableSandboxTaskService")
+    public TaskService taskService(ProcessEngine processEngine) {
+        return processEngine.getTaskService();
+    }
+
+    @Bean(name = "flowableSandboxHistoryService")
+    public HistoryService historyService(ProcessEngine processEngine) {
+        return processEngine.getHistoryService();
     }
 
 }
