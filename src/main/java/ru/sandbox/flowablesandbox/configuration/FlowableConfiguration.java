@@ -58,4 +58,9 @@ public class FlowableConfiguration {
         return processEngine.getHistoryService();
     }
 
+    @Bean(name = "flowableSandboxDynamicBpmnService")
+    public DynamicBpmnService dynamicBpmnService(ProcessEngine processEngine) {
+        return processEngine.getDynamicBpmnService();
+    }
+
 }

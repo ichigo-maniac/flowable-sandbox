@@ -11,4 +11,8 @@ public interface SandboxProcessDefinitionService {
 
     byte[] getProcessDefinitionDiagram(String processDefinitionKey);
 
+    void deployDummyProcessDefinition();
+
+    void  deployDummyProcessDefinitionFromClasspath();
+
 }

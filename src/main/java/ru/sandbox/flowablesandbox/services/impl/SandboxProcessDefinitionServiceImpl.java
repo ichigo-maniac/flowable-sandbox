@@ -1,7 +1,9 @@
 package ru.sandbox.flowablesandbox.services.impl;
 
 import org.apache.commons.io.IOUtils;
+import org.flowable.engine.DynamicBpmnService;
 import org.flowable.engine.RepositoryService;
+import org.flowable.engine.repository.DeploymentBuilder;
 import org.flowable.engine.repository.ProcessDefinition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,5 +44,24 @@ public class SandboxProcessDefinitionServiceImpl implements SandboxProcessDefini
             e.printStackTrace();
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public void deployDummyProcessDefinition() {
+        ClassLoader classloader = getClass().getClassLoader();
+        InputStream inputStream = classloader.getResourceAsStream("data/dummy-process.bpmn20.xml");
+
+        DeploymentBuilder deploymentBuilder = repositoryService.createDeployment().addInputStream(
+                "classpath:/data/dummy-process.bpmn20.xml", inputStream
+        );
+        deploymentBuilder.deploy();
+    }
+
+    @Override
+    public void deployDummyProcessDefinitionFromClasspath() {
+        DeploymentBuilder deploymentBuilder = repositoryService.createDeployment().addClasspathResource(
+                "data/dummy-process.bpmn20.xml"
+        );
+        deploymentBuilder.deploy();
     }
 }

@@ -4,10 +4,7 @@ import org.flowable.engine.repository.ProcessDefinition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.*;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.sandbox.flowablesandbox.dto.ProcessDefinitionDto;
 import ru.sandbox.flowablesandbox.mapping.SandboxMapper;
 import ru.sandbox.flowablesandbox.services.SandboxProcessDefinitionService;
@@ -47,6 +44,16 @@ public class ProcessDefinitionsController {
         } else {
             return null;
         }
+    }
+
+    @PostMapping("/deploy_dummy_process_definition")
+    public void deployDummyProcessDefinition() {
+        processDefinitionService.deployDummyProcessDefinition();
+    }
+
+    @PostMapping("/deploy_dummy_process_definition_from_classpath")
+    public void deployDummyProcessDefinitionFromClasspath() {
+        processDefinitionService.deployDummyProcessDefinitionFromClasspath();
     }
 
     private ResponseEntity<?> prepareFileResponse(String name, byte[] diagramData) {
