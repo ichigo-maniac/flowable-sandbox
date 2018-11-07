@@ -24,6 +24,11 @@ public class SandboxProcessInstanceServiceImpl implements SandboxProcessInstance
     }
 
     @Override
+    public ProcessInstance startProcessInstanceByMessage(String message) {
+        return runtimeService.startProcessInstanceByMessage(message);
+    }
+
+    @Override
     public ProcessInstance getProcessInstanceById(String processInstanceId) {
         return runtimeService.createProcessInstanceQuery().processInstanceId(processInstanceId).includeProcessVariables().singleResult();
     }

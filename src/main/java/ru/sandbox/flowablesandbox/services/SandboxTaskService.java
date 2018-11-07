@@ -13,4 +13,6 @@ public interface SandboxTaskService {
 
     Task completeTask(String taskId);
 
+    Task completeTaskWithDummyVariable(String taskId);
+
 }

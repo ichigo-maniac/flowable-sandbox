@@ -1,6 +1,7 @@
 package ru.sandbox.flowablesandbox.services.impl;
 
 import org.flowable.engine.HistoryService;
+import org.flowable.engine.RuntimeService;
 import org.flowable.engine.TaskService;
 import org.flowable.task.api.Task;
 import org.flowable.task.api.history.HistoricTaskInstance;
@@ -19,6 +20,9 @@ public class SandboxTaskServiceImpl implements SandboxTaskService {
     @Autowired
     private HistoryService historyService;
 
+    @Autowired
+    private RuntimeService runtimeService;
+
     @Override
     public List<Task> getActiveTasks() {
         return taskService.createTaskQuery().includeProcessVariables().includeTaskLocalVariables().active().list();
@@ -33,6 +37,18 @@ public class SandboxTaskServiceImpl implements SandboxTaskService {
     public Task completeTask(String taskId) {
         Task task = taskService.createTaskQuery().taskId(taskId).active().singleResult();
         if (task != null) {
+            taskService.complete(taskId);
+            return task;
+        } else {
+            throw new RuntimeException("No task with id " + taskId);
+        }
+    }
+
+    @Override
+    public Task completeTaskWithDummyVariable(String taskId) {
+        Task task = taskService.createTaskQuery().taskId(taskId).active().singleResult();
+        if (task != null) {
+            runtimeService.setVariable(task.getExecutionId(), "highway_to_hell", true);
             taskService.complete(taskId);
             return task;
         } else {

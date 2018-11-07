@@ -3,9 +3,15 @@
   <process id="test-process" name="test-process" isExecutable="true">
     <startEvent id="start-event"></startEvent>
     <userTask id="user-task" name="User task"></userTask>
-    <sequenceFlow id="sid-4C1ED87F-9A5E-44B5-8F50-486FB11CFB0B" sourceRef="start-event" targetRef="user-task"></sequenceFlow>
     <endEvent id="end-event"></endEvent>
-    <sequenceFlow id="sid-3FB53962-EAA8-41D8-B945-3AACD226CE69" sourceRef="user-task" targetRef="end-event"></sequenceFlow>
+    <serviceTask id="sid-85AE4E10-67EB-4810-B5A0-31D6308913CB" name="Start processes by message" flowable:delegateExpression="${startProcessByMessageDelegate}"></serviceTask>
+    <sequenceFlow id="sid-3FB53962-EAA8-41D8-B945-3AACD226CE69" sourceRef="sid-85AE4E10-67EB-4810-B5A0-31D6308913CB" targetRef="end-event"></sequenceFlow>
+    <sequenceFlow id="sid-39598546-7F5D-4C30-8DB9-D77501852733" sourceRef="user-task" targetRef="sid-85AE4E10-67EB-4810-B5A0-31D6308913CB"></sequenceFlow>
+    <sequenceFlow id="sid-4C1ED87F-9A5E-44B5-8F50-486FB11CFB0B" sourceRef="start-event" targetRef="user-task">
+      <extensionElements>
+        <flowable:executionListener event="start" class="ru.sandbox.flowablesandbox.listeners.DummyExecutionListener"></flowable:executionListener>
+      </extensionElements>
+    </sequenceFlow>
   </process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_test-process">
     <bpmndi:BPMNPlane bpmnElement="test-process" id="BPMNPlane_test-process">
@@ -16,15 +22,22 @@
         <omgdc:Bounds height="80.0" width="100.0" x="330.0" y="120.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="end-event" id="BPMNShape_end-event">
-        <omgdc:Bounds height="28.0" width="28.0" x="688.0" y="150.0"></omgdc:Bounds>
+        <omgdc:Bounds height="28.0" width="28.0" x="825.0" y="146.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-85AE4E10-67EB-4810-B5A0-31D6308913CB" id="BPMNShape_sid-85AE4E10-67EB-4810-B5A0-31D6308913CB">
+        <omgdc:Bounds height="80.0" width="100.0" x="555.0" y="120.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge bpmnElement="sid-4C1ED87F-9A5E-44B5-8F50-486FB11CFB0B" id="BPMNEdge_sid-4C1ED87F-9A5E-44B5-8F50-486FB11CFB0B">
         <omgdi:waypoint x="129.94999973967353" y="160.0"></omgdi:waypoint>
         <omgdi:waypoint x="329.99999999999613" y="160.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-39598546-7F5D-4C30-8DB9-D77501852733" id="BPMNEdge_sid-39598546-7F5D-4C30-8DB9-D77501852733">
+        <omgdi:waypoint x="429.9499999999491" y="160.0"></omgdi:waypoint>
+        <omgdi:waypoint x="554.9999999999761" y="160.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="sid-3FB53962-EAA8-41D8-B945-3AACD226CE69" id="BPMNEdge_sid-3FB53962-EAA8-41D8-B945-3AACD226CE69">
-        <omgdi:waypoint x="429.94999999999857" y="160.62049689440994"></omgdi:waypoint>
-        <omgdi:waypoint x="688.0005612414735" y="163.8261000987639"></omgdi:waypoint>
+        <omgdi:waypoint x="654.9499999999617" y="160.0"></omgdi:waypoint>
+        <omgdi:waypoint x="825.0" y="160.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

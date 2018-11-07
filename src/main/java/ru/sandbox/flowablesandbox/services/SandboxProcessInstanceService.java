@@ -7,6 +7,8 @@ public interface SandboxProcessInstanceService {
 
     ProcessInstance startProcessInstanceByKey(String processDefinitionKey);
 
+    ProcessInstance startProcessInstanceByMessage(String message);
+
     ProcessInstance getProcessInstanceById(String processInstanceId);
 
     List<ProcessInstance> getActiveProcessInstances();

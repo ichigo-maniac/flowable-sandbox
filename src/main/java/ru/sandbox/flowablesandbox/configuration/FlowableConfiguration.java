@@ -1,7 +1,10 @@
 package ru.sandbox.flowablesandbox.configuration;
 
 import org.flowable.engine.*;
+import org.flowable.engine.delegate.JavaDelegate;
 import org.flowable.spring.SpringProcessEngineConfiguration;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
@@ -9,9 +12,14 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.transaction.PlatformTransactionManager;
 import javax.sql.DataSource;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 @Configuration
 public class FlowableConfiguration {
+
+    @Autowired
+    private ApplicationContext applicationContext;
 
     @Bean(name = "flowableSandboxConfiguration")
     public SpringProcessEngineConfiguration flowableConfiguration(DataSource dataSource, PlatformTransactionManager transactionManager) {
@@ -20,6 +28,13 @@ public class FlowableConfiguration {
         configuration.setTransactionManager(transactionManager);
         configuration.setDatabaseSchemaUpdate(ProcessEngineConfiguration.DB_SCHEMA_UPDATE_TRUE);
         configuration.setDeploymentResources(getAutoDeployResources());
+        /** Set beans */
+        Map<Object, Object> beans = new HashMap<>();
+        Map<String, JavaDelegate> delegateMap = applicationContext.getBeansOfType(JavaDelegate.class);
+        for (String key : delegateMap.keySet()) {
+            beans.put(key, delegateMap.get(key));
+        }
+        configuration.setBeans(beans);
         return configuration;
     }
 

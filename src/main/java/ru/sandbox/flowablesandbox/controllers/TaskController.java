@@ -40,4 +40,10 @@ public class TaskController {
         return sandboxMapper.toTaskDto(completedTask);
     }
 
+    @PostMapping("/complete_hell/{taskId}")
+    public TaskDto completeHellTask(@PathVariable("taskId") String taskId) {
+        Task completedTask = taskService.completeTaskWithDummyVariable(taskId);
+        return sandboxMapper.toTaskDto(completedTask);
+    }
+
 }

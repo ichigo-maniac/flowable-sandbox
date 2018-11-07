@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:flowable="http://flowable.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.flowable.org/processdef">
+  <message id="start-process-message" name="start-process-message"></message>
+  <process id="message-start-process" name="message-start-process" isExecutable="true">
+    <startEvent id="sid-CC5E5665-CB27-48DA-9E0B-C0B6112BE41A" isInterrupting="true">
+      <messageEventDefinition messageRef="start-process-message"></messageEventDefinition>
+    </startEvent>
+    <userTask id="message-user-task" name="Message User task"></userTask>
+    <sequenceFlow id="sid-4523AA50-C31F-4781-BB02-DC20D8C611A4" sourceRef="sid-CC5E5665-CB27-48DA-9E0B-C0B6112BE41A" targetRef="message-user-task"></sequenceFlow>
+    <endEvent id="sid-53757900-656C-47AD-B696-8A4EECB3B6A4"></endEvent>
+    <userTask id="acdc-fan-task" name="I love ACDC"></userTask>
+    <userTask id="justin-biever-task" name="Justin Biever one love"></userTask>
+    <sequenceFlow id="sid-7C45AA7A-D666-4298-86FC-B5D7E37511B9" sourceRef="justin-biever-task" targetRef="sid-53757900-656C-47AD-B696-8A4EECB3B6A4"></sequenceFlow>
+    <sequenceFlow id="sid-19E04C80-AF74-4484-B292-CA41714EC437" sourceRef="acdc-fan-task" targetRef="sid-53757900-656C-47AD-B696-8A4EECB3B6A4"></sequenceFlow>
+    <exclusiveGateway id="sid-AB6D05A7-495A-40AA-A2D9-4121DF0F45F0"></exclusiveGateway>
+    <sequenceFlow id="sid-A624F65F-2846-4115-9965-6D4B861C7409" sourceRef="sid-AB6D05A7-495A-40AA-A2D9-4121DF0F45F0" targetRef="justin-biever-task">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${highway_to_hell == false}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="sid-3044331B-7F0D-4FF9-A84E-D7179FD70ECB" sourceRef="message-user-task" targetRef="sid-AB6D05A7-495A-40AA-A2D9-4121DF0F45F0"></sequenceFlow>
+    <sequenceFlow id="sid-72D77693-DC7B-4570-9FA3-FC8E68ABF762" sourceRef="sid-AB6D05A7-495A-40AA-A2D9-4121DF0F45F0" targetRef="acdc-fan-task">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${highway_to_hell == true}]]></conditionExpression>
+    </sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_message-start-process">
+    <bpmndi:BPMNPlane bpmnElement="message-start-process" id="BPMNPlane_message-start-process">
+      <bpmndi:BPMNShape bpmnElement="sid-CC5E5665-CB27-48DA-9E0B-C0B6112BE41A" id="BPMNShape_sid-CC5E5665-CB27-48DA-9E0B-C0B6112BE41A">
+        <omgdc:Bounds height="30.0" width="30.5" x="129.75" y="239.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="message-user-task" id="BPMNShape_message-user-task">
+        <omgdc:Bounds height="80.0" width="100.0" x="285.0" y="214.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-53757900-656C-47AD-B696-8A4EECB3B6A4" id="BPMNShape_sid-53757900-656C-47AD-B696-8A4EECB3B6A4">
+        <omgdc:Bounds height="28.0" width="28.0" x="915.0" y="255.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="acdc-fan-task" id="BPMNShape_acdc-fan-task">
+        <omgdc:Bounds height="80.0" width="100.0" x="600.0" y="75.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="justin-biever-task" id="BPMNShape_justin-biever-task">
+        <omgdc:Bounds height="80.0" width="100.0" x="600.0" y="330.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-AB6D05A7-495A-40AA-A2D9-4121DF0F45F0" id="BPMNShape_sid-AB6D05A7-495A-40AA-A2D9-4121DF0F45F0">
+        <omgdc:Bounds height="40.0" width="40.0" x="450.0" y="234.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="sid-4523AA50-C31F-4781-BB02-DC20D8C611A4" id="BPMNEdge_sid-4523AA50-C31F-4781-BB02-DC20D8C611A4">
+        <omgdi:waypoint x="160.69999943967255" y="254.0"></omgdi:waypoint>
+        <omgdi:waypoint x="285.0" y="254.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-A624F65F-2846-4115-9965-6D4B861C7409" id="BPMNEdge_sid-A624F65F-2846-4115-9965-6D4B861C7409">
+        <omgdi:waypoint x="482.029896645205" y="261.919406779661"></omgdi:waypoint>
+        <omgdi:waypoint x="600.0" y="337.8272980501393"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-7C45AA7A-D666-4298-86FC-B5D7E37511B9" id="BPMNEdge_sid-7C45AA7A-D666-4298-86FC-B5D7E37511B9">
+        <omgdi:waypoint x="699.9499999999998" y="351.89964157706095"></omgdi:waypoint>
+        <omgdi:waypoint x="915.8324334560792" y="273.7497293605919"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-72D77693-DC7B-4570-9FA3-FC8E68ABF762" id="BPMNEdge_sid-72D77693-DC7B-4570-9FA3-FC8E68ABF762">
+        <omgdi:waypoint x="481.72578369905955" y="245.75391849529782"></omgdi:waypoint>
+        <omgdi:waypoint x="600.0" y="153.81908077994433"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-19E04C80-AF74-4484-B292-CA41714EC437" id="BPMNEdge_sid-19E04C80-AF74-4484-B292-CA41714EC437">
+        <omgdi:waypoint x="699.9499999999999" y="142.57096774193542"></omgdi:waypoint>
+        <omgdi:waypoint x="916.7318727444192" y="262.233348518065"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-3044331B-7F0D-4FF9-A84E-D7179FD70ECB" id="BPMNEdge_sid-3044331B-7F0D-4FF9-A84E-D7179FD70ECB">
+        <omgdi:waypoint x="384.9499999998759" y="254.0"></omgdi:waypoint>
+        <omgdi:waypoint x="450.0" y="254.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
